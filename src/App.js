@@ -29,14 +29,13 @@ import AdminHome from './pages/AdminHome';
 import AdminProductDetailPage from './pages/AdminProductDetailPage';
 import AdminProductFormPage from './pages/AdminProductFormPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
-import { positions, Provider } from 'react-alert';
-import AlertTemplate from 'react-alert-template-basic';
+import { ToastContainer, toast } from 'react-toastify';
 import StripeCheckout from './pages/StripeCheckout';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 
 const options = {
   timeout: 5000,
-  position: positions.BOTTOM_LEFT,
+ 
 };
 
 const router = createBrowserRouter([
@@ -188,17 +187,27 @@ function App() {
   }, [dispatch, user]);
 
   return (
-    <>
-      <div className="App">
-        {userChecked && (
-          <Provider template={AlertTemplate} {...options}>
-            <RouterProvider router={router} />
-          </Provider>
-        )}
-        {/* Link must be inside the Provider */}
-      </div>
-    </>
+    <div className="App">
+      {userChecked && (
+        <RouterProvider router={router} />
+      )}
+  
+      {/* ToastContainer should always be mounted */}
+      <ToastContainer 
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+    </div>
   );
-}
+  
+      }
 
 export default App;
